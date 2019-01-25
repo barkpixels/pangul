@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/softwaretalks/pangul/issues"
   },
-  "homepage": "https://github.com/softwaretalks/pangul#readme"
+  "homepage": "https://github.com/softwaretalks/pangul#readme",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
 }
