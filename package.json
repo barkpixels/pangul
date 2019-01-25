@@ -1,0 +1,22 @@
+{
+  "name": "pangul",
+  "version": "0.0.0",
+  "description": "Health checking service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/softwaretalks/pangul.git"
+  },
+  "keywords": [
+    "Healtcheck"
+  ],
+  "author": "Softwaretalks",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/softwaretalks/pangul/issues"
+  },
+  "homepage": "https://github.com/softwaretalks/pangul#readme"
+}
