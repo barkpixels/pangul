@@ -1,14 +1,16 @@
 const fs = require('fs');
 
 const request = require('request');
+const logger = require('pino')();
+
 
 const CONF_FILE = "./conf.json";
 
 fs.readFile(CONF_FILE, (err, data)=>{
   if(err)
-    console.error(data);
+    logger.error(data);
   let conf = JSON.parse(data.toString());
-  console.log("Finished parsing config");
+  logger.info("Finished parsing config");
   run_check(conf);
 });
 
@@ -19,9 +21,9 @@ function run_check(conf){
 function health_check(url){
   request(url, (err, resp, body)=>{
     if(err){
-      console.error(url + ": fail");
+      logger.info(url + ": fail");
       return;
     }
-    console.log(url + ": ok");
+    logger.info(url + ": ok");
   });
 }
