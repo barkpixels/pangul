@@ -1,6 +1,8 @@
 const express = require('express');
-
+const bodyParser = require('body-parser');
 const app = express();
+
+app.use(bodyParser.json());
 
 const PORT = process.argv['PORT'] || 8000;
 

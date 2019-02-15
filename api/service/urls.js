@@ -12,3 +12,14 @@ module.exports.listURL = async (params) => {
     })),
   };
 };
+
+module.exports.addURL = async({url}) => {
+  let create = await Model.add({url: url});
+  return {
+    status: 201,
+    data: {
+      url: create.url,
+      id: create.id
+    }
+  };
+};

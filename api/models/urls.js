@@ -26,6 +26,3 @@ class URLS {
 }
 
 module.exports = new URLS(require('./seq'));
-setImmediate(()=>{
-  module.exports.add({ url: 'https://youtube.com' });
-});
