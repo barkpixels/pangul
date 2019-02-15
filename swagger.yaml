@@ -1,8 +1,8 @@
 swagger: "2.0"
 info:
-  description: "Pnagul API schema."
+  description: "Pangul API schema."
   version: "1.0.0"
-  title: "Pnagul"
+  title: "Pangul"
   license:
     name: "MIT"
 host: "example.com"
@@ -16,22 +16,22 @@ schemes:
 - "https"
 - "http"
 paths:
-  /url:
+  /urls:
     get:
       tags:
       - url
-      summary: Get all of URLS
+      summary: Returns all URLs
       description: ""
       operationId: listURL
       produces:
       - application/json
       responses:
-        201:
-          description: Created
+        200:
+          description: List of all eligible urls
           schema:
             type: array
             items:
-              $ref: '#/definitions/URL'
+              $ref: '#/definitions/URLCreate'
         409:
           description: URL exists
     post:
@@ -49,7 +49,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/URL'
+          $ref: '#/definitions/URLCreate'
       responses:
         201:
           description: Created
@@ -57,7 +57,9 @@ paths:
             $ref: '#/definitions/URL'
         409:
           description: URL exists
-  /url/{id}:
+        400:
+          description: Malformed URL
+  /urls/{id}:
     get:
       tags:
       - url
@@ -77,10 +79,37 @@ paths:
             $ref: '#/definitions/URL'
         404:
           description: Not found
-  /url/{id}/reports:
+  /reports:
+    post:
+      tags:
+      - report
+      summary: Add a report to system
+      description: ""
+      operationId: addReport
+      produces:
+      - application/json
+      responses:
+        201:
+          description: Ok
     get:
       tags:
-      - url
+      - report
+      summary: Returns Reports
+      description: ""
+      operationId: listReport
+      produces:
+      - application/json
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Report'
+  /reports/{id}:
+    get:
+      tags:
+      - report
       summary: Get All Reports for One URL
       description: ""
       operationId: getReportURL
@@ -109,53 +138,6 @@ paths:
               $ref: '#/definitions/Report'
         404:
           description: Not found
-  /report:
-    post:
-      tags:
-      - report
-      summary: Add a report to system
-      description: ""
-      operationId: addReport
-      produces:
-      - application/json
-      responses:
-        201:
-          description: Ok
-    get:
-      tags:
-      - report
-      summary: Returns Reports
-      description: ""
-      operationId: listReport
-      produces:
-      - application/json
-      responses:
-        200:
-          description: Ok
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Report'
-  /report/{id}:
-    get:
-      tags:
-      - report
-      summary: Returns Reports
-      description: ""
-      operationId: getReport
-      produces:
-      - application/json
-      parameters:
-      - in: path
-        type: number
-        name: id
-        description: report id
-        required: true
-      responses:
-        200:
-          description: Ok
-          schema:
-            $ref: '#/definitions/Report'
 definitions:
   URL:
     type: object
@@ -164,6 +146,11 @@ definitions:
         type: string
       id:
         type: number
+  URLCreate:
+    type: object
+    properties:
+      url:
+        type: string
   Report:
     type: object
     properties:
