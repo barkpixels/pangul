@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/softwaretalks/pangul#readme",
   "dependencies": {
+    "express": "^4.16.4",
     "pino": "^5.11.0",
     "request": "^2.88.0"
   }
