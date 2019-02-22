@@ -1,0 +1,169 @@
+swagger: "2.0"
+info:
+  description: "Pangul API schema."
+  version: "1.0.0"
+  title: "Pangul"
+  license:
+    name: "MIT"
+host: "example.com"
+basePath: "/api/v1/"
+tags:
+- name: url
+  description: Checks url and everything related to them
+- name: report
+  description: Reports 
+schemes:
+- "https"
+- "http"
+paths:
+  /urls:
+    get:
+      tags:
+      - url
+      summary: Returns all URLs
+      description: ""
+      operationId: listURL
+      produces:
+      - application/json
+      responses:
+        200:
+          description: List of all eligible urls
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/URLCreate'
+        409:
+          description: URL exists
+    post:
+      tags:
+      - url
+      summary: Add a new url to pangul
+      description: ""
+      operationId: addURL
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/URLCreate'
+      responses:
+        201:
+          description: Created
+          schema:
+            $ref: '#/definitions/URL'
+        409:
+          description: URL exists
+        400:
+          description: Malformed URL
+  /urls/{id}:
+    get:
+      tags:
+      - url
+      summary: Get One URL
+      description: ""
+      operationId: getURL
+      parameters:
+      - in: path
+        type: number
+        name: id
+        description: url id
+        required: true
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/URL'
+        404:
+          description: Not found
+  /reports:
+    post:
+      tags:
+      - report
+      summary: Add a report to system
+      description: ""
+      operationId: addReport
+      produces:
+      - application/json
+      responses:
+        201:
+          description: Ok
+    get:
+      tags:
+      - report
+      summary: Returns Reports
+      description: ""
+      operationId: listReport
+      produces:
+      - application/json
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Report'
+  /reports/{id}:
+    get:
+      tags:
+      - report
+      summary: Get All Reports for One URL
+      description: ""
+      operationId: getReportURL
+      parameters:
+      - in: path
+        type: number
+        name: id
+        description: url id
+        required: true
+      - in: body
+        name: body
+        required: true
+        schema:
+          type: object
+          properties:
+            urlId: 
+              type: number
+            report:
+              $ref: '#/definitions/Report'
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Report'
+        404:
+          description: Not found
+definitions:
+  URL:
+    type: object
+    properties:
+      url:
+        type: string
+      id:
+        type: number
+  URLCreate:
+    type: object
+    properties:
+      url:
+        type: string
+  Report:
+    type: object
+    properties:
+      responseDateTime:
+        type: number
+      requestDateTime:
+        type: number
+      IsUp:
+        type: boolean
+      URL:
+        $ref: '#/definitions/URL'
+      id:
+        type: number
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
