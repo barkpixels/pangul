@@ -1,4 +1,5 @@
 const Model = require('../models/urls');
+const logger = require('pino')();
 
 module.exports = {};
 
@@ -23,3 +24,20 @@ module.exports.addURL = async({url}) => {
     }
   };
 };
+
+module.exports.getURL = async ({ id }) => {
+  let URL = await Model.get(id);
+  if (!URL) {
+    return {
+      status: 404,
+      data: {}
+    };
+  }
+  return {
+    status: 200,
+    data: {
+      url: URL.url,
+      id: URL.id
+    }
+  };
+}

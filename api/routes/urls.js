@@ -7,6 +7,19 @@ const logger = require('pino')();
 
 const Service = require('../service/urls');
 
+router.get('/:id', async(req, resp)=>{
+  let params = {
+    id: req.params.id,
+  };
+  try{
+    let ans = await Service.getURL(params);
+    resp.status(ans.status).send(ans.data);
+  } catch(e){
+    logger.error(e);
+    resp.sendStatus(500);
+  }
+});
+
 router.get('/', async(req, resp) => {
   let params = {};
   try{
