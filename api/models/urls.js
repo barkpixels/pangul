@@ -1,28 +1,28 @@
-const Sequelize = require('sequelize');
+const Sequelize = require('sequelize')
 
 class URLS {
-  constructor(seq){
+  constructor(seq) {
     this.url = seq.define('url', {
       url: Sequelize.STRING(256),
-    });
-    this.url.sync();
+    })
+    this.url.sync()
   }
 
-  async list(){
-    return await this.url.findAll();
+  async list() {
+    return await this.url.findAll()
   }
 
-  async get(id){
+  async get(id) {
     // TODO handle missing case
-    return await this.url.findById(id);
+    return await this.url.findById(id)
   }
 
-  async add(url){
+  async add(url) {
     // TODO check for duplicated entry
     return await this.url.create({
-      url: url.url
-    });
+      url: url.url,
+    })
   }
 }
 
-module.exports = new URLS(require('./seq'));
+module.exports = new URLS(require('./seq'))

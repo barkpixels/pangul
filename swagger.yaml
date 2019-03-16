@@ -1,30 +1,30 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  description: "Pangul API schema."
-  version: "1.0.0"
-  title: "Pangul"
+  description: 'Pangul API schema.'
+  version: '1.0.0'
+  title: 'Pangul'
   license:
-    name: "MIT"
-host: "example.com"
-basePath: "/api/v1/"
+    name: 'MIT'
+host: 'example.com'
+basePath: '/api/v1/'
 tags:
-- name: url
-  description: Checks url and everything related to them
-- name: report
-  description: Reports 
+  - name: url
+    description: Checks url and everything related to them
+  - name: report
+    description: Reports
 schemes:
-- "https"
-- "http"
+  - 'https'
+  - 'http'
 paths:
   /urls:
     get:
       tags:
-      - url
+        - url
       summary: Returns all URLs
-      description: ""
+      description: ''
       operationId: listURL
       produces:
-      - application/json
+        - application/json
       responses:
         200:
           description: List of all eligible urls
@@ -36,20 +36,20 @@ paths:
           description: URL exists
     post:
       tags:
-      - url
+        - url
       summary: Add a new url to pangul
-      description: ""
+      description: ''
       operationId: addURL
       consumes:
-      - application/json
+        - application/json
       produces:
-      - application/json
+        - application/json
       parameters:
-      - in: body
-        name: body
-        required: true
-        schema:
-          $ref: '#/definitions/URLCreate'
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/URLCreate'
       responses:
         201:
           description: Created
@@ -62,16 +62,16 @@ paths:
   /urls/{id}:
     get:
       tags:
-      - url
+        - url
       summary: Get One URL
-      description: ""
+      description: ''
       operationId: getURL
       parameters:
-      - in: path
-        type: number
-        name: id
-        description: url id
-        required: true
+        - in: path
+          type: number
+          name: id
+          description: url id
+          required: true
       responses:
         200:
           description: Ok
@@ -82,39 +82,39 @@ paths:
   /reports:
     post:
       tags:
-      - report
+        - report
       summary: Add a report to system
-      description: ""
+      description: ''
       operationId: addReport
       produces:
-      - application/json
+        - application/json
       responses:
         201:
           description: Ok
     get:
       tags:
-      - report
+        - report
       summary: Returns Reports
-      description: ""
+      description: ''
       operationId: listReport
-      parameters: 
-      - in: query
-        type: number
-        name: page
-        description: Page number for pagination (default 1)
-        required: false
-      - in: query
-        type: number
-        name: size
-        description: Page size for pagination (default 20)
-        required: false
-      - in: query
-        type: string
-        name: where
-        description: Where clause for query (default "")
-        required: false
+      parameters:
+        - in: query
+          type: number
+          name: page
+          description: Page number for pagination (default 1)
+          required: false
+        - in: query
+          type: number
+          name: size
+          description: Page size for pagination (default 20)
+          required: false
+        - in: query
+          type: string
+          name: where
+          description: Where clause for query (default "")
+          required: false
       produces:
-      - application/json
+        - application/json
       responses:
         200:
           description: Ok
@@ -125,16 +125,16 @@ paths:
   /reports/{id}:
     get:
       tags:
-      - report
+        - report
       summary: Get All Reports for One URL
-      description: ""
+      description: ''
       operationId: getReportURL
       parameters:
-      - in: path
-        type: number
-        name: id
-        description: url id
-        required: true
+        - in: path
+          type: number
+          name: id
+          description: url id
+          required: true
       responses:
         200:
           description: Ok
@@ -171,5 +171,5 @@ definitions:
       id:
         type: number
 externalDocs:
-  description: "Find out more about Swagger"
-  url: "http://swagger.io"
+  description: 'Find out more about Swagger'
+  url: 'http://swagger.io'
